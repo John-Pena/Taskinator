@@ -228,6 +228,43 @@ var saveTasks = function() {
     localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
+var loadTasks = function() {
+    var savedTasks = localStorage.getItem("tasks");
+
+    if (!savedTasks) {
+        // will stop function if no tasks are null
+        return false;
+    }
+    console.log("Saved tasks found!")
+
+    // converts tasks back to an array of objects
+    savedTasks = JSON.parse(savedTasks);
+
+    for (var i = 0; i < savedTasks.length; i++) {
+        //pass each object into the 'createTaskEl()' function
+        createTaskEl(savedTasks[i]);
+    }
+
+    
+    //codes commentted out are my codes I attempted
+    //var loadTasks = JSON.parse(localStorage.getItem("tasks"));
+
+    //if (tasks === null) {
+        //console.log(tasks);
+    //}
+
+    //for (var i = 0; i < tasks.length; i++) {
+        //console.log(tasks[i]);
+    //}
+
+    // this should be the actual code
+    // retrieves data from local storage in string format
+};
+
+   
+
 formEl.addEventListener("submit", taskFormHandler);
 pageContentEl.addEventListener("click", taskButtonHandler);
 pageContentEl.addEventListener("change", taskStatusChangeHandler);
+
+loadTasks();
